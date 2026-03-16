@@ -1,0 +1,100 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: bitwarden
+spec:
+  chartRef:
+    kind: OCIRepository
+    name: bitwarden
+  interval: 1h
+  values:
+    controllers:
+      bitwarden-cli:
+        strategy: Recreate
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/charlesthomas/bitwarden-cli
+              tag: 2023.12.1
+            env:
+              BW_HOST:
+                valueFrom:
+                  secretKeyRef:
+                    name: bitwarden-cli
+                    key: BW_HOST
+              BW_USER:
+                valueFrom:
+                  secretKeyRef:
+                    name: bitwarden-cli
+                    key: BW_USERNAME
+              BW_PASSWORD:
+                valueFrom:
+                  secretKeyRef:
+                    name: bitwarden-cli
+                    key: BW_PASSWORD
+              BW_CLIENTID:
+                valueFrom:
+                  secretKeyRef:
+                    name: bitwarden-cli
+                    key: BW_CLIENTID
+                    optional: true
+              BW_CLIENTSECRET:
+                valueFrom:
+                  secretKeyRef:
+                    name: bitwarden-cli
+                    key: BW_CLIENTSECRET
+                    optional: true
+            probes:
+              liveness:
+                enabled: true
+                custom: true
+                spec:
+                  exec:
+                    command:
+                      - wget
+                      - -q
+                      - http://127.0.0.1:8087/sync?force=true
+                      - --post-data=
+                  initialDelaySeconds: 20
+                  failureThreshold: 3
+                  timeoutSeconds: 10
+                  periodSeconds: 120
+              readiness:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: &port 8087
+                  initialDelaySeconds: 20
+                  failureThreshold: 3
+                  timeoutSeconds: 1
+                  periodSeconds: 10
+              startup:
+                enabled: true
+                custom: true
+                spec:
+                  tcpSocket:
+                    port: *port
+                  initialDelaySeconds: 10
+                  failureThreshold: 30
+                  timeoutSeconds: 1
+                  periodSeconds: 5
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: {drop: ["ALL"]}
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 128Mi
+    service:
+      app:
+        controller: bitwarden-cli
+        ports:
+          http:
+            port: *port

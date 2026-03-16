@@ -12,3 +12,10 @@ Brewfile.lock.json
 Thumbs.db
 kubeconfig
 talosconfig
+.secrets.env
+infra/terraform/proxmox/.terraform/
+infra/terraform/proxmox/*.tfstate
+infra/terraform/proxmox/*.tfstate.*
+infra/terraform/proxmox/crash.log
+infra/terraform/proxmox/*.tfvars
+infra/terraform/proxmox/.envrc

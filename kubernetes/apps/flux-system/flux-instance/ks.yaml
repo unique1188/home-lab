@@ -6,9 +6,15 @@ metadata:
   name: flux-instance
 spec:
   dependsOn:
+    - name: bitwarden
+      namespace: external-secrets
     - name: flux-operator
   interval: 1h
   path: ./kubernetes/apps/flux-system/flux-instance/app
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: bitwarden-item-ids-secret
   prune: true
   sourceRef:
     kind: GitRepository

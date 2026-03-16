@@ -8,7 +8,7 @@ metadata:
 spec:
   deletionPolicy: WaitForTermination
   interval: 1h
-  path: ./kubernetes/apps
+  path: ./kubernetes/flux/cluster-core
   prune: true
   sourceRef:
     kind: GitRepository

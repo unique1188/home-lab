@@ -17,4 +17,7 @@ log lvl msg *args:
 
 [private]
 template file *args:
-    minijinja-cli "{{ file }}" {{ args }} | op inject
+    set -a; \
+    [[ -f "{{ justfile_dir() }}/.secrets.env" ]] && source "{{ justfile_dir() }}/.secrets.env"; \
+    set +a; \
+    minijinja-cli --env "{{ file }}" {{ args }} | "{{ justfile_dir() }}/scripts/render-secrets.sh"

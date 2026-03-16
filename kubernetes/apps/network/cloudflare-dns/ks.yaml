@@ -5,6 +5,9 @@ kind: Kustomization
 metadata:
   name: cloudflare-dns
 spec:
+  dependsOn:
+    - name: bitwarden
+      namespace: external-secrets
   healthChecks:
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
@@ -15,6 +18,10 @@ spec:
       name: dnsendpoints.externaldns.k8s.io
   interval: 1h
   path: ./kubernetes/apps/network/cloudflare-dns/app
+  postBuild:
+    substituteFrom:
+      - kind: Secret
+        name: bitwarden-item-ids-secret
   prune: true
   sourceRef:
     kind: GitRepository

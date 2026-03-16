@@ -1,0 +1,13 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../apps/kube-system/cilium/ks.yaml
+  - ../../apps/kube-system/coredns/ks.yaml
+  - ../../apps/kube-system/spegel/ks.yaml
+  - ../../apps/cert-manager/kustomization.yaml
+  - ../../apps/external-secrets/kustomization.yaml
+  - ../../apps/flux-system/kustomization.yaml
+  - ../../apps/network/kustomization.yaml
+  - ../../apps/openebs-system/openebs/ks.yaml
