@@ -9,11 +9,15 @@ spec:
     kind: OCIRepository
     name: external-secrets
   interval: 1h
+  upgrade:
+    remediation:
+      remediateLastFailure: false
+      retries: 0
   values:
     leaderElect: true
     serviceMonitor:
-      enabled: true
+      enabled: false
     grafanaDashboard:
-      enabled: true
+      enabled: false
     webhook:
       replicaCount: 2
