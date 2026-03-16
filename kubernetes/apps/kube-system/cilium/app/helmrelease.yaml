@@ -20,7 +20,7 @@ spec:
       preallocateMaps: true
     bpfClockProbe: true
     bgpControlPlane:
-      enabled: true
+      enabled: false
     cgroup:
       automount:
         enabled: false
@@ -29,7 +29,6 @@ spec:
       exclusive: false
     dashboards:
       enabled: true
-    devices: bond+
     enableIPv4BIGTCP: true
     endpointRoutes:
       enabled: true
@@ -45,7 +44,7 @@ spec:
     kubeProxyReplacement: true
     kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
     l2announcements:
-      enabled: false
+      enabled: true
     loadBalancer:
       algorithm: maglev
       mode: dsr
@@ -55,17 +54,17 @@ spec:
       dashboards:
         enabled: true
       prometheus:
-        enabled: true
+        enabled: false
         serviceMonitor:
-          enabled: true
+          enabled: false
       replicas: 2
       rollOutPods: true
     pmtuDiscovery:
       enabled: true
     prometheus:
-      enabled: true
+      enabled: false
       serviceMonitor:
-        enabled: true
+        enabled: false
         trustCRDsExist: true
     rollOutCiliumPods: true
     routingMode: native
