@@ -36,19 +36,16 @@ spec:
                   secretKeyRef:
                     name: bitwarden-cli
                     key: BW_PASSWORD
-                    optional: true
               - name: BW_CLIENTID
                 valueFrom:
                   secretKeyRef:
                     name: bitwarden-cli
                     key: BW_CLIENTID
-                    optional: true
               - name: BW_CLIENTSECRET
                 valueFrom:
                   secretKeyRef:
                     name: bitwarden-cli
                     key: BW_CLIENTSECRET
-                    optional: true
             probes:
               liveness:
                 enabled: true
