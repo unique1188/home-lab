@@ -18,8 +18,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/charlesthomas/bitwarden-cli
-              tag: 2023.12.1
+              repository: docker.io/node
+              tag: 22-bookworm-slim
             command:
               - /bin/sh
               - -ec
@@ -27,6 +27,7 @@ spec:
               - |
                 export BITWARDENCLI_APPDATA_DIR=/tmp/bitwarden-cli
                 mkdir -p "$BITWARDENCLI_APPDATA_DIR"
+                npm install -g @bitwarden/cli@2026.2.0
                 bw config server "$BW_HOST"
                 bw logout || true
                 bw login --apikey
@@ -90,7 +91,7 @@ spec:
                   tcpSocket:
                     port: *port
                   initialDelaySeconds: 10
-                  failureThreshold: 30
+                  failureThreshold: 60
                   timeoutSeconds: 1
                   periodSeconds: 5
             securityContext:
