@@ -24,11 +24,10 @@ spec:
             env:
               NO_AUTOUPDATE: true
               TUNNEL_METRICS: 0.0.0.0:8080
-            envFrom:
-              - secretRef:
-                  name: "{{ .Release.Name }}-secret"
             args:
               - tunnel
+              - --config
+              - /etc/cloudflared/config.yaml
               - run
             probes:
               liveness: &probes
@@ -77,6 +76,8 @@ spec:
       config:
         data:
           config.yaml: |-
+            tunnel: ${CLOUDFLARE_TUNNEL_ID}
+            credentials-file: /etc/cloudflared/credentials.json
             ingress:
               - hostname: "*.turbo.ac"
                 originRequest:
@@ -93,3 +94,9 @@ spec:
         globalMounts:
           - path: /etc/cloudflared/config.yaml
             subPath: config.yaml
+      credentials-file:
+        type: secret
+        name: "{{ .Release.Name }}-secret"
+        globalMounts:
+          - path: /etc/cloudflared/credentials.json
+            subPath: credentials.json
