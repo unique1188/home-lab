@@ -21,33 +21,31 @@ spec:
               repository: ghcr.io/charlesthomas/bitwarden-cli
               tag: 2023.12.1
             env:
-              BW_HOST:
+              - name: BW_HOST
                 valueFrom:
                   secretKeyRef:
                     name: bitwarden-cli
                     key: BW_HOST
-              BW_USER:
+              - name: BW_USER
                 valueFrom:
                   secretKeyRef:
                     name: bitwarden-cli
                     key: BW_USERNAME
-              BW_PASSWORD:
+              - name: BW_PASSWORD
                 valueFrom:
                   secretKeyRef:
                     name: bitwarden-cli
                     key: BW_PASSWORD
-              BW_CLIENTID:
+              - name: BW_CLIENTID
                 valueFrom:
                   secretKeyRef:
                     name: bitwarden-cli
                     key: BW_CLIENTID
-                    optional: true
-              BW_CLIENTSECRET:
+              - name: BW_CLIENTSECRET
                 valueFrom:
                   secretKeyRef:
                     name: bitwarden-cli
                     key: BW_CLIENTSECRET
-                    optional: true
             probes:
               liveness:
                 enabled: true
