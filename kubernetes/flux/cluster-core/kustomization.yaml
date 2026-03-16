@@ -6,8 +6,8 @@ resources:
   - ../../apps/kube-system/cilium/ks.yaml
   - ../../apps/kube-system/coredns/ks.yaml
   - ../../apps/kube-system/spegel/ks.yaml
-  - ../../apps/cert-manager/kustomization.yaml
-  - ../../apps/external-secrets/kustomization.yaml
-  - ../../apps/flux-system/kustomization.yaml
-  - ../../apps/network/kustomization.yaml
+  - ../../apps/cert-manager
+  - ../../apps/external-secrets
+  - ../../apps/flux-system
+  - ../../apps/network
   - ../../apps/openebs-system/openebs/ks.yaml
