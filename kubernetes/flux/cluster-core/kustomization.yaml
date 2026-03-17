@@ -15,3 +15,4 @@ resources:
   - ../../apps/flux-system
   - ../../apps/network
   - ../../apps/openebs-system/openebs/ks.yaml
+  - ../../apps/system-upgrade
