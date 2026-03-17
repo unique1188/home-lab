@@ -50,8 +50,9 @@ spec:
             resources:
               requests:
                 cpu: 100m
+                memory: 512Mi
               limits:
-                memory: 32Gi
+                memory: 1Gi
     defaultPodOptions:
       terminationGracePeriodSeconds: 300
       securityContext:
@@ -68,33 +69,18 @@ spec:
           http:
             port: *port
       bittorrent:
-        type: LoadBalancer
-        annotations:
-          lbipam.cilium.io/ips: 192.168.69.123
-        externalTrafficPolicy: Local
         ports:
           bittorrent-tcp:
             port: *torrentPort
             protocol: TCP
-    route:
-      app:
-        hostnames:
-          - "{{ .Release.Name }}.turbo.ac"
-        parentRefs:
-          - name: envoy-internal
-            namespace: network
-        rules:
-          - backendRefs:
-              - identifier: app
-                port: *port
     persistence:
       config:
         existingClaim: "{{ .Release.Name }}"
-      media:
+      data:
         type: nfs
-        server: expanse.internal
-        path: /mnt/ceres/Media
+        server: 192.168.10.9
+        path: /data/k8s
         globalMounts:
-          - path: /media
+          - path: /data
       tmp:
         type: emptyDir

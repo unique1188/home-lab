@@ -65,21 +65,14 @@ spec:
         ports:
           http:
             port: *port
-    route:
-      app:
-        hostnames:
-          - "{{ .Release.Name }}.turbo.ac"
-        parentRefs:
-          - name: envoy-internal
-            namespace: network
     persistence:
       config:
         existingClaim: "{{ .Release.Name }}"
-      media:
+      data:
         type: nfs
-        server: expanse.internal
-        path: /mnt/ceres/Media
+        server: 192.168.10.9
+        path: /data/k8s
         globalMounts:
-          - path: /media
+          - path: /data
       tmp:
         type: emptyDir

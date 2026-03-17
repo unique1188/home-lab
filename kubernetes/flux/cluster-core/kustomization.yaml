@@ -15,9 +15,11 @@ resources:
   - ../../apps/flux-system
   - ../../apps/network
   - ../../apps/default/prowlarr/ks.yaml
+  - ../../apps/default/qbittorrent/ks.yaml
   - ../../apps/default/radarr/ks.yaml
   - ../../apps/default/sabnzbd/ks.yaml
   - ../../apps/default/seerr/ks.yaml
   - ../../apps/default/sonarr/ks.yaml
+  - ../../apps/default/bazarr/ks.yaml
   - ../../apps/openebs-system/openebs/ks.yaml
   - ../../apps/system-upgrade

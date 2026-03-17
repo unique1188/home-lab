@@ -82,5 +82,11 @@ spec:
         defaultMode: 0775
         globalMounts:
           - readOnly: true
+      data:
+        type: nfs
+        server: 192.168.10.9
+        path: /data/k8s
+        globalMounts:
+          - path: /data
       tmp:
         type: emptyDir
