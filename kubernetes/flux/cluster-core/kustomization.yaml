@@ -5,6 +5,10 @@ kind: Kustomization
 resources:
   - ../../apps/kube-system/cilium/ks.yaml
   - ../../apps/kube-system/coredns/ks.yaml
+  - ../../apps/kube-system/descheduler/ks.yaml
+  - ../../apps/kube-system/metrics-server/ks.yaml
+  - ../../apps/kube-system/reloader/ks.yaml
+  - ../../apps/kube-system/snapshot-controller/ks.yaml
   - ../../apps/kube-system/spegel/ks.yaml
   - ../../apps/cert-manager
   - ../../apps/external-secrets
