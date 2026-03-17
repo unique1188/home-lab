@@ -23,9 +23,6 @@ spec:
               TZ: America/New_York
               TAUTULLI_HTTP_BASE_URL: https://tautulli.turbo.ac
               TAUTULLI_HTTP_PORT: &port 80
-            envFrom:
-              - secretRef:
-                  name: "{{ .Release.Name }}-secret"
             probes:
               liveness:
                 enabled: true
@@ -69,15 +66,14 @@ spec:
         ports:
           http:
             port: *port
-    route:
-      app:
-        hostnames:
-          - "{{ .Release.Name }}.turbo.ac"
-        parentRefs:
-          - name: envoy-internal
-            namespace: network
     persistence:
       config:
         existingClaim: "{{ .Release.Name }}"
+      data:
+        type: nfs
+        server: 192.168.10.9
+        path: /data/k8s
+        globalMounts:
+          - path: /data
       tmp:
         type: emptyDir

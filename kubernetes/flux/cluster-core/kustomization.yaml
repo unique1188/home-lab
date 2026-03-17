@@ -14,6 +14,7 @@ resources:
   - ../../apps/external-secrets
   - ../../apps/flux-system
   - ../../apps/network
+  - ../../apps/default/autobrr/ks.yaml
   - ../../apps/default/prowlarr/ks.yaml
   - ../../apps/default/qbittorrent/ks.yaml
   - ../../apps/default/radarr/ks.yaml
@@ -21,5 +22,6 @@ resources:
   - ../../apps/default/seerr/ks.yaml
   - ../../apps/default/sonarr/ks.yaml
   - ../../apps/default/bazarr/ks.yaml
+  - ../../apps/default/tautulli/ks.yaml
   - ../../apps/openebs-system/openebs/ks.yaml
   - ../../apps/system-upgrade
